@@ -1,28 +1,56 @@
+import json
+
 class Generic:
 
-  def __init__(self):
-    pass
-
   def json2obj(self, sFile):
-    sObj = open(sFile)
+    sObj = open(sFile+".json")
     return json.loads(sObj)
 
-  def mapjson(self, sFile, sVals):
-    oObj = self.json2obj(sFile)
-    if sVals in self.__dict__:
-      for name,item in enumerate(oObj):
-        exec("self.%s[%s] = %s" % (sVals,name,item))
+class Candidate(Generic):
+  
+  def __init__(self):
+    self.sName = ""
+    self.sRole = ""
+    self.aAns = {}
+    self.dPweight = 0.0
+    
+  def __init__(self,name):
+    self.sName = name
+    self.sRole = ""
+    self.aAns = {}
+    self.dPweight = 0.0
+
+  def loadAns(self):
+    self.aAns = self.json2obj("candidates/"+(self.sName))
+
+  def checkAns(self,aUserAns):
+    iCorrect = 0
+    for key,ans in enumerate(aUserAns):
+      if self.aAns[key] == ans:
+        iCorrect += 1
+    self.dPweight = (iCorrect/len(self.aAns))*100
 
 class User(Generic):
 
   def __init__(self):
+    self.super()
     #TBD on needed location data
     #Quiz Data
     self.aoPolpool = []
-    self.aoPicks = []
-    #tuple of questions and answers
-    self.aaQA = [] 
+    self.aPicks = {}
+    #dict of questions and answers, with keys for role types
+    self.aaaQA = {} 
 
-  def populateQ(self,sQues):
-    oQues = self.json2obj(sQues)
+  def addPool(self,oCan):
+    if oCan.sRole not in self.aaaQA:
+      aaaQA[oCan.sRole] = oCan.aAns
+    for ques in aaaQA[oCan.sRole]:
+      ques = ""
+    self.aoPolpool.append(oCan)
+
+  def addPick(self,sRole):
+    top
+    for can in self.aoPolpool:
+
+
   
