@@ -7,3 +7,7 @@
   2. Ask questions to detemine political preference
   3. Determine list of reccomended voting 
   4. (Hotep Bonus) prolematic or false beliefs can be countered with some educative resources
+
+## Package requirements
+* venv
+* Flask
