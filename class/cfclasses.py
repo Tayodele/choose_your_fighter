@@ -48,9 +48,6 @@ class User(Generic):
       ques = ""
     self.aoPolpool.append(oCan)
 
-  def addPick(self,sRole):
-    top
-    for can in self.aoPolpool:
-
-
-  
+  #def addPick(self,sRole):
+  #  top
+  #  for can in self.aoPolpool:
