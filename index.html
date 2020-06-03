@@ -1,6 +1,18 @@
 <head>
-  <script type="text/javascript" src="vue.js"></script>
+  <script type="text/javascript" src="jquery-3.5.1.js"></script>
+  <!-- Load React. -->
+  <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+  <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- JSX Dev additon-->
+  <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
 <body>
-  Hello World!
+  <h1 id="title">Choose Your Fighters</h1>
+  <div id="start_loc"></div>
+
+  
+  <!-- Load Components -->
+  <script type="text/babel" src="components/start_loc.js"></script>
 </body>
