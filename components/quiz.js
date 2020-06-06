@@ -17,7 +17,7 @@ function QuizQuestion(props) {
     );
   }
   return(
-    <div display="block">
+    <div>
       <h3 className="quiz-title">{props.ques.question}</h3>
       <div className="quiz-ans">{ques}</div>
       <NavigButton name="Back" onClick={props.onClick} />
@@ -40,30 +40,49 @@ class QuizBlock extends React.Component {
               "Maaaan Fuck a Wood Chuck!"], 
         choice: "" }
       ],
+      iCurrentQ: 0
     }
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
+    const current = this.state.iCurrentQ;
     const target = event.target;
     const atrivia = this.state.trivia.slice();
-    atrivia[target.qindex].choice = target.value;
-    this.setState({
-      trivia: atrivia
-    });
+    atrivia[current].choice = target.value;
+    if(current != atrivia.length - 1) {
+      this.setState({
+        trivia: atrivia,
+        iCurrentQ: current + 1
+      });
+    } else {
+      this.submitQ();
+    }
   }
 
-  redoQuestion(iInd) {
+  submitQ() {
     console.log("done");
+  }
+
+  redoQuestion() {
+    console.log("go back");
+    const current = this.state.iCurrentQ;
+    if(current > 0) {
+      this.setState({
+        iCurrentQ: current - 1
+      });
+    }
   }
 
   render() {
     const items = [];
+    const current = this.state.iCurrentQ;
+    const show = {display: 'block'}
+    const hide = {display: 'none'}
     for (let index = 0; index < this.state.trivia.length; index++) {
-      if(index === 0) {
-        items.push(<QuizQuestion key={index} display="block" qindex={index} ques={this.state.trivia[index]} onClick={this.redoQuestion(index)} onChange={this.handleChange}/>);
+      if(index === current) {
       } else {
-        items.push(<QuizQuestion key={index} display="none" qindex={index} ques={this.state.trivia[index]} onClick={this.redoQuestion(index)} onChange={this.handleChange}/>);
+        items.push(<QuizQuestion key={index} style={hide} qindex={current} ques={this.state.trivia[current]} onClick={() => this.redoQuestion()} onChange={this.handleChange}/>)
       }
     }
     return (

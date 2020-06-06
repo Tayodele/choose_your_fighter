@@ -42,12 +42,11 @@ class BallotCard extends React.Component {
     console.log("But Nobody Came");
   }
 
-
   goTo() {
     //This will make this box hide, and the first quiz box appear
     console.log("Going to Disney");
   }
-
+  
   render() {
     if(this.state.popup) {
       return (
