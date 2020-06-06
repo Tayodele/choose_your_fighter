@@ -20,7 +20,7 @@
 * Ballot - obj
   * Race - obj
     * Candidate - obj
-      * ***Bunch of information***
+      * *< Bunch of information >*
       * Question Banks - obj (same bank for every Candidate in Race)
         * Questions - string
         * Answers - string
@@ -38,3 +38,9 @@
 
 * Testing the app must be done from an http domain, use local
   * `python -m http.server`
+
+### TODO
+
+* Figure out where data is going to be collected
+* Determine database tech
+  * **Note**: Data shouldn't be too large for jsut chicago and won't save user data or need to be updated very often, so a lightwieght solution would be best.
