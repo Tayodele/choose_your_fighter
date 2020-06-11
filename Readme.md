@@ -2,7 +2,7 @@
 ## A Online Quiz App that matches you with the politicians you should vote for in you local election
 
 ## Tools
-* Built with React.js client side and python backend
+* Built with React.js (React-Bootstrap) client side and python backend
 
 ## Objective
 * Regional for Chicago Only right now
@@ -15,6 +15,7 @@
 ## Package requirements
 * venv
 * Flask
+* MySQL (w/ peewee)
 
 ## Object Heirarchy
 * Ballot - obj
@@ -31,7 +32,7 @@
 
 ### dev notes
 
-* would like nicer way to bring up python venv anywhere withput oploading whole shebang.
+* would like nicer way to bring up python venv anywhere without committiong whole shebang.
 * set FLASK_APP env var to set flask application file
 * `python -m flask run`
 * set up toolchain once frontend is at a good point
@@ -42,5 +43,4 @@
 ### TODO
 
 * Figure out where data is going to be collected
-* Determine database tech
-  * **Note**: Data shouldn't be too large for jsut chicago and won't save user data or need to be updated very often, so a lightwieght solution would be best.
+  * **Note**: Data shouldn't be too large for just chicago and won't save user data or need to be updated very often, so a lightwieght solution would be best.

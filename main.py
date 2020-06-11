@@ -3,8 +3,7 @@ from flask import Flask
 from flask import request
 
 #Adding classes
-sys.path.append('/cfclasses')
-from cfclasses import *
+from cfclasses.cfclasses import User
 
 app = Flask(__name__)
 
@@ -13,11 +12,26 @@ app = Flask(__name__)
 def hello_world():
   return "hello world!"
 
-@app.route('/data/candidate/<name>', methods=['GET','POST'])
-def usertest(name):
-  if request.method == 'POST':
-    pass
-  else:
-    oUser = {}
-    oUser['Name'] = name
-    return oUser
+
+@app.after_request
+def after_request(response):
+  response.headers.add('Access-Control-Allow-Origin', 'http://localhost:8000')
+  return response
+
+@app.route('/user', methods=['GET'])
+def getBallot():
+  oUser = User()
+  oUser.house  = request.args.get('house',0)
+  oUser.dir    = request.args.get('dir','')
+  oUser.stname = request.args.get('stname','')
+  oUser.suffix = request.args.get('suffix','')
+  oUser.zip    = request.args.get('zip',0)
+  oUser.formemail = request.args.get('email','')
+  oUser.findBallot()
+  return  {
+    'ballot_id': oUser.aBallot
+  }
+
+if __name__ == "__main__":
+  app.run()
+  

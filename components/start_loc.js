@@ -25,20 +25,22 @@ class IntroBox extends React.Component {
   constructor(props) {
     super(props);
     this.Dirs = [["N","North"],["E","East"],["S","South"],["W","West"]];
-    this.Suff = [["AVE","Avenue"],
-                  ["BLVD","Boulevard"],
-                  ["CT","Court"],
-                  ["DR","Drive"],
-                  ["HWY","Highway"],
-                  ["LN","Lane"],
-                  ["Market","Market"],
-                  ["PARK","Parkway"]];
+    this.Suff = [["Ave","Avenue"],
+                ["Blvd","Boulevard"],
+                ["Ct","Court"],
+                ["Dr","Drive"],
+                ["Hwy","Highway"],
+                ["Ln","Lane"],
+                ["Market","Market"],
+                ["Park","Parkway"],
+                ["St","Street"]];
     this.state = { formData: {
       house: "",
       dir: this.Dirs[0][0],
       stname: "",
       suffix: this.Suff[0][0],
-      lname: ""
+      zip: "",
+      email: ""
     } };
 
     this.handleChange = this.handleChange.bind(this);
@@ -48,13 +50,13 @@ class IntroBox extends React.Component {
   handleChange(event) {
     const target = event.target;
     const oCurrent = this.state.formData;
-    console.log(target.name + " " + target.value);
     const oForm = {
       house : target.name === "House Number" ? target.value : oCurrent.house,
       dir : target.name === "Street Direction" ? target.value : oCurrent.dir,
       stname : target.name === "Street Name" ? target.value : oCurrent.stname,
       suffix : target.name === "Street Suffix" ? target.value : oCurrent.suffix,
-      lname : target.name === "Last Name" ? target.value : oCurrent.lname
+      zip : target.name === "Zip" ? target.value : oCurrent.zip,
+      email : target.name === "Email" ? target.value : oCurrent.email
     };
 
     this.setState({
@@ -64,9 +66,16 @@ class IntroBox extends React.Component {
 
   handleSubmit(event) {
     //send API request and jump to next box
-    console.log("Something happened! (But nobody came...)");
-    //console.log(this.state.formData.house);
-    //console.log(this.state.formData.dir);
+    console.log("Retrieving Ballot");
+    $.ajax({
+      method: "GET",
+      url: "http://127.0.0.1:5000/user",
+      dataType: "application/json",
+      data: this.state.formData
+    })
+    .done(function(results) {
+      console.log(results);
+    });
     event.preventDefault();
     //Also, hide thisd box and make the ballot box appear
   }
@@ -80,7 +89,8 @@ class IntroBox extends React.Component {
           <DropDown type="text" name="Street Direction" value={this.state.formData.dir} options={this.Dirs} onChange={this.handleChange}/><br/>
           <FormField type="text" name="Street Name" value={this.state.formData.stname} onChange={this.handleChange}/><br/>
           <DropDown type="text" name="Street Suffix" value={this.state.formData.suffix} options={this.Suff} onChange={this.handleChange}/><br/>
-          <FormField type="text" name="Last Name" value={this.state.formData.lname} onChange={this.handleChange}/><br/>
+          <FormField type="text" name="Zip" value={this.state.formData.zip} onChange={this.handleChange}/><br/>
+          <FormField type="text" name="Email" value={this.state.formData.email} onChange={this.handleChange}/><br/>
           <input type="submit" value="Get Ballot" />
         </form>
       </div>
