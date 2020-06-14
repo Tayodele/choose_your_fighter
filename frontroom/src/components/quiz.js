@@ -1,3 +1,5 @@
+import React from 'react';
+
 function NavigButton(props) {
   return (
     <button className="navig" onClick={props.onClick}>
@@ -94,6 +96,4 @@ class QuizBlock extends React.Component {
   }
 }
 
-
-const domContainer = document.querySelector('#quiz');
-ReactDOM.render(<QuizBlock />, domContainer);
+export default QuizBlock;

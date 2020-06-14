@@ -1,3 +1,5 @@
+import React from 'react';
+
 function NavigButton(props) {
   return (
     <button className="navig" onClick={props.onClick}>
@@ -69,8 +71,4 @@ class BallotCard extends React.Component {
   }
 }
 
-const domContainer = document.querySelector('#ballot_card');
-ReactDOM.render(<BallotCard popup={false}/>, domContainer);
-
-const domContainer2 = document.querySelector('#ballot_pop');
-ReactDOM.render(<BallotCard popup={true}/>, domContainer2);
+export default BallotCard;

@@ -12,10 +12,10 @@
   3. Determine list of reccomended voting 
   4. (Hotep Bonus) prolematic or false beliefs can be countered with some educative resources
 
-## Package requirements
-* venv
-* Flask
-* MySQL (w/ peewee)
+## Tool Requirements
+* Python 3
+* Node/npm
+* venv (comes with python 3)
 
 ## Object Heirarchy
 * Ballot - obj
@@ -32,15 +32,14 @@
 
 ### dev notes
 
-* would like nicer way to bring up python venv anywhere without committiong whole shebang.
+* Python packaging
+  * `requirements.txt` holds all python dependecies and such
+  * make sure you're in venv with `env\Scripts\activatre.bat`
+  * `pip install -r requirements.txt`
+
 * set FLASK_APP env var to set flask application file
-* `python -m flask run`
-* set up toolchain once frontend is at a good point
+* `python <FLASK_APP>.py` starts ***backend server***
 
-* Testing the app must be done from an http domain, use local
-  * `python -m http.server`
-
-### TODO
-
-* Figure out where data is going to be collected
-  * **Note**: Data shouldn't be too large for just chicago and won't save user data or need to be updated very often, so a lightwieght solution would be best.
+* Using create-react-app (./frontroom)
+  * `npm start` to load up dev ***frontend server***
+  * `npm run build` to compile production code

@@ -1,3 +1,6 @@
+import React from 'react'
+import $ from 'jquery'
+
 function FormField(props) {
   return (
     <span>
@@ -74,7 +77,7 @@ class IntroBox extends React.Component {
       data: this.state.formData
     })
     .done(function(results) {
-      console.log(results);
+      console.log(results.slice(0));
     });
     event.preventDefault();
     //Also, hide thisd box and make the ballot box appear
@@ -98,5 +101,4 @@ class IntroBox extends React.Component {
   }
 }
 
-const domContainer = document.querySelector('#start_loc');
-ReactDOM.render(<IntroBox />, domContainer);
+export default IntroBox;
