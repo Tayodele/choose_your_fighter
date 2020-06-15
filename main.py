@@ -1,18 +1,24 @@
 import sys
 from flask import Flask
 from flask import request
+from flask import jsonify
 
 #Adding classes
 from cfclasses.cfclasses import User
+from playhouse import shortcuts
 
 app = Flask(__name__)
 
-#testing waters
-@app.route('/testpath')
-def hello_world():
-  return "hello world!"
+#helper functions
+def popBallot(aObj):
+  aArr = []
+  for obj in aObj:
+    oBal = shortcuts.model_to_dict(obj)
+    oBal['oBanks'] = (obj.getBanks(stringy=True))
+    aArr.append(oBal)
+  return aArr
 
-
+#api
 @app.after_request
 def after_request(response):
   response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
@@ -21,17 +27,18 @@ def after_request(response):
 @app.route('/user', methods=['GET'])
 def getBallot():
   oUser = User()
-  oUser.house  = request.args.get('house',0)
+  oUser.house  = request.args.get('house','')
   oUser.dir    = request.args.get('dir','')
   oUser.stname = request.args.get('stname','')
   oUser.suffix = request.args.get('suffix','')
-  oUser.zip    = request.args.get('zip',0)
+  oUser.zip    = request.args.get('zip','')
   oUser.formemail = request.args.get('email','')
   oUser.findBallot()
-  return  {
-    'ballot_id': oUser.aBallot
-  }
+  oUser.id2Obj()
+  return jsonify(
+    data=popBallot(oUser.aBallot),
+    success=True
+  )
 
 if __name__ == "__main__":
   app.run()
-  
