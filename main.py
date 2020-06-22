@@ -15,6 +15,7 @@ def popBallot(aObj):
   for obj in aObj:
     oBal = shortcuts.model_to_dict(obj)
     oBal['oBanks'] = (obj.getBanks(stringy=True))
+    oBal['oCands'] = (obj.getCands(stringy=True))
     aArr.append(oBal)
   return aArr
 

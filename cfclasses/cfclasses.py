@@ -33,15 +33,12 @@ class QuestionBank(Generic):
     oBal = shortcuts.model_to_dict(self)
     return oBal
 
-# class Candidate(Generic):
-  
-#   def __init__(self, name = ""):
-#     self.sName = name
-#     self.oBank = None
-#     self.sRole = ""
-#     self.oImg = None
-#     self.oLinks = None
-#     self.dPweight = 0.0
+class Candidate(Generic):
+
+  name = TextField()
+  email = TextField()
+  position_id = TextField()
+  candidate_id = IntegerField()
 
   #def checkAns(self,aUserAns):
   #  iCorrect = 0
@@ -58,11 +55,13 @@ class ChicagoBallot(Generic):
   candidates_id = TextField() #json array
   description = TextField()
   banks_id = TextField() #json array
-  oBanks = []
+  #oBanks = []
+  #oCands = []
 
   # Convert banks id attr to banks objects
   # return: 0 - success, 1 - some id's not found, 2- fail (attr already converted)
   def getBanks(self,stringy=False):
+    self.oBanks = []
     aBanksc = json.loads(self.banks_id)
     iStatus = 0
     if(self.isNumber(aBanksc[0])):
@@ -80,7 +79,24 @@ class ChicagoBallot(Generic):
       return iStatus
     else:
       return 2
-
+  
+  def getCands(self,stringy=False):
+    self.oCands = []
+    aCandsc = json.loads(self.candidates_id)
+    iStatus = 0
+    for ican in aCandsc:
+      try:
+        oCand = Candidate.get(Candidate.candidate_id == ican)
+        self.oCands.append(oCand)
+      except DoesNotExist as e:
+        iStatus = 1
+    if(stringy):
+      oCandsj = []
+      for obj in self.oCands:
+        oCandsj.append(shortcuts.model_to_dict(obj))
+      return oCandsj
+    return iStatus
+    
 class User(Generic):
 
   address = TextField()

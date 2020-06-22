@@ -1,12 +1,6 @@
 import React from 'react';
-
-function NavigButton(props) {
-  return (
-    <button className="navig" onClick={props.onClick}>
-      {props.name}
-    </button>
-  );
-}
+import Slide from './Slide';
+import NavigButton from './nav_but';
 
 /*
 TODO EndPop that pops out the side of the 
@@ -52,11 +46,14 @@ class EndCard extends React.Component {
 
   render(){
     const items = [];
-    return (
+    const content = (
       <div>
         <h2 className="title">Our Reccomendations for 2020</h2>
         {items}
       </div>
+    );
+    return (
+      <Slide vis={this.props.vis} content={content} />
     );
   }
 }

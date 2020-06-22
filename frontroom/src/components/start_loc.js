@@ -1,4 +1,5 @@
 import React from 'react'
+import Slide from './Slide'
 
 function FormField(props) {
   return (
@@ -28,7 +29,6 @@ class IntroBox extends React.Component {
     super(props);
     this.Dirs = props.Dirs;
     this.Suff = props.Suff;
-    
     this.handleChange = this.handleChange.bind(this);
   }
   
@@ -47,19 +47,20 @@ class IntroBox extends React.Component {
   }
 
   render() {
+    const content = (
+    <form onSubmit={this.props.handleSubmit}>
+      <h2 className="boxhead">Enter Your Information to Get Started</h2>
+      <FormField type="text" name="House Number" value={this.props.formData.house} onChange={this.handleChange}/><br/>
+      <DropDown type="text" name="Street Direction" value={this.props.formData.dir} options={this.Dirs} onChange={this.handleChange}/><br/>
+      <FormField type="text" name="Street Name" value={this.props.formData.stname} onChange={this.handleChange}/><br/>
+      <DropDown type="text" name="Street Suffix" value={this.props.formData.suffix} options={this.Suff} onChange={this.handleChange}/><br/>
+      <FormField type="text" name="Zip" value={this.props.formData.zip} onChange={this.handleChange}/><br/>
+      <FormField type="text" name="Email" value={this.props.formData.email} onChange={this.handleChange}/><br/>
+      <input type="submit" value="Get Ballot" />
+    </form>
+    );
     return (
-      <div>
-        <form onSubmit={this.props.handleSubmit}>
-          <h2 className="boxhead">Enter Your Information to Get Started</h2>
-          <FormField type="text" name="House Number" value={this.props.formData.house} onChange={this.handleChange}/><br/>
-          <DropDown type="text" name="Street Direction" value={this.props.formData.dir} options={this.Dirs} onChange={this.handleChange}/><br/>
-          <FormField type="text" name="Street Name" value={this.props.formData.stname} onChange={this.handleChange}/><br/>
-          <DropDown type="text" name="Street Suffix" value={this.props.formData.suffix} options={this.Suff} onChange={this.handleChange}/><br/>
-          <FormField type="text" name="Zip" value={this.props.formData.zip} onChange={this.handleChange}/><br/>
-          <FormField type="text" name="Email" value={this.props.formData.email} onChange={this.handleChange}/><br/>
-          <input type="submit" value="Get Ballot" />
-        </form>
-      </div>
+      <Slide vis={this.props.vis} content={content}/>
     );
   }
 }
