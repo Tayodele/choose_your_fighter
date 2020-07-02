@@ -34,8 +34,11 @@
 
 * Python packaging
   * `requirements.txt` holds all python dependecies and such
-  * make sure you're in venv with `env\Scripts\activatre.bat`
+  * make sure you're in venv with `env\Scripts\activate.bat`
   * `pip install -r requirements.txt`
+
+* Django server
+  * `python manage.py runserver` to lauch backend server
 
 * set FLASK_APP env var to set flask application file
 * `python <FLASK_APP>.py` starts ***backend server***
@@ -43,3 +46,12 @@
 * Using create-react-app (./frontroom)
   * `npm start` to load up dev ***frontend server***
   * `npm run build` to compile production code
+
+* Boundaries App frustrations
+  * only works with django 2.1 as of now
+  * loadshapefiles breaks for some reason without the -m flag (loop is goofy with current Chi dasta set. -m merges any accidental ditto keys)
+
+* TODO
+  * Finsh building out boundaries API to get ballot based on user Address
+  * Convert site backend to Django, no point using peewee when it annoys me and boundaries is using django (can still use sqllite just have to convert from peewee models to Django)
+  * BONUS: Put work into getting boundaries package to support Django 3.0, push up public
