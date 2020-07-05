@@ -18,6 +18,7 @@ from django.urls import include,path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('boundaries.urls'))
+    path('', include('cyf_quiz.urls')),
+    path('loc/', include('boundaries.urls'))
 ]
 

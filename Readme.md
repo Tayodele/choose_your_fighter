@@ -14,8 +14,8 @@
 
 ## Tool Requirements
 * Python 3
-* Node/npm
-* venv (comes with python 3)
+* npm
+* venv,pip (comes with python 3)
 
 ## Object Heirarchy
 * Ballot - obj
@@ -37,11 +37,8 @@
   * make sure you're in venv with `env\Scripts\activate.bat`
   * `pip install -r requirements.txt`
 
-* Django server
+* Django server (./cyf_back)
   * `python manage.py runserver` to lauch backend server
-
-* set FLASK_APP env var to set flask application file
-* `python <FLASK_APP>.py` starts ***backend server***
 
 * Using create-react-app (./frontroom)
   * `npm start` to load up dev ***frontend server***
