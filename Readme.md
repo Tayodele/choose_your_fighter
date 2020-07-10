@@ -55,3 +55,7 @@
   * Finsh building out boundaries API to get ballot based on user Address
   * Convert site backend to Django, no point using peewee when it annoys me and boundaries is using django (can still use sqllite just have to convert from peewee models to Django)
   * BONUS: Put work into getting boundaries package to support Django 3.0, push up public
+
+* Deployment Notes
+  * Nominatim needs to be deployed on server
+  * React needs to be converted to production
