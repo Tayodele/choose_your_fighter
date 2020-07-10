@@ -13,6 +13,10 @@ class QuestionBank(models.Model):
 
 class CandAns(models.Model):
   question = models.ForeignKey(QuestionBank,on_delete=models.CASCADE)
+  answers = models.TextField()
+
+  def __str__():
+    oObj = {}
 
 class Candidate(models.Model):
 
