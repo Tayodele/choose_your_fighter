@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from geopy.geocoders import Nominatim
+import requests
+
+# singlet vars
 
 # Create your views here.
 
@@ -21,3 +25,19 @@ def getBallot(request):
   #  success=True
   #)
   return HttpResponse("getting a ballot!")
+
+def find_Address(request):
+  dAddr = request.GET.dict()
+  sAddr = dAddr['house'] + ' ' + dAddr['dir'] + ' ' + dAddr['stname'] + ' ' + dAddr['suffix'] + ', Chicago, IL ' + dAddr['zip'] + ', USA' 
+  locator = Nominatim(user_agent='chiLocator')
+  location = locator.geocode(sAddr)
+  bound_data = user_Locator({ 'long': location.latitude, 'lat': location.longitude})
+  return HttpResponse(bound_data.text)
+
+def find_LongLat(request):
+  bound_data = user_Locator(request.GET.dict())
+  return HttpResponse(bound_data.text)
+
+def user_Locator(dLL):
+  sLL = str(dLL['long']) + ',' + str(dLL['lat'])
+  return requests.get('http://localhost:8000/loc/boundaries/?contains='+sLL)
